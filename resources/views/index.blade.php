@@ -1,9 +1,10 @@
 @section('titulo', "Index")
-@extends('layouts.layout')
+@extends('layouts.dashboard')
 
 @section('content')
 <br>
-@if (count($cliente) > 0)
+
+@if(count($cliente) > 0)
 <div class="container">
     <a href="/cadastrar" class="btn btn-primary">Cadastrar</a>
     <div class="row">
@@ -43,6 +44,8 @@
         </div>
     </div>
 @endif
+
+
 @endsection
 
 

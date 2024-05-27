@@ -8,7 +8,7 @@ use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
-    public function index(Request $req){
+    public function index(){
         $cliente = Cliente::all();
         return view('index')->with("cliente", $cliente);
     }
@@ -18,13 +18,13 @@ class ClienteController extends Controller
     }
 
     public function adicionar(Request $req){
-        $cliente = new Cliente;
+        $cliente = new Cliente();
         $cliente->Email = $req->input('Email');
         $cliente->Nome = $req->input('Nome');
         $cliente->Nascimento = $req->input('Nascimento');
         $cliente->Telefone = $req->input('Telefone');
         $cliente->save();
-        return redirect('/');
+        return redirect('/dashboard');
     }
 
     public function editar($id){
@@ -41,10 +41,10 @@ class ClienteController extends Controller
             "Senha" => $req->Senha,
             "Telefone" => $req->Telefone,
         ]);
-        return redirect('/');
+        return redirect('/dashboard');
     }
 
-    public function excluir(Request $req, $id){
+    public function excluir($id){
         $cliente = Cliente::find($id);
         $cliente->delete();
         return redirect()->back();

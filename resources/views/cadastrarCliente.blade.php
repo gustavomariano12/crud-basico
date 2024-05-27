@@ -1,5 +1,5 @@
 
-@extends('layouts.layout')
+@extends('layouts.dashboard')
 
 @section('titulo', "Insert")
 
@@ -30,7 +30,7 @@
                     </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
-                <a href="/" class="btn btn-danger">Voltar</a>
+                <a href="/dashboard" class="btn btn-danger">Voltar</a>
                 </form>
 
         </div>
