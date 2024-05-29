@@ -36,16 +36,16 @@ class UsuarioControllers extends Controller
         }
         if($senha !== $csenha){
             return "senhas não são iguais";
-        }else {
-            $token = Str::random(60);
-            $user = new Usuario();
-            $user->Username = $username;
-            $user->Email = $email;
-            $user->Senha = $senha;
-            $user->Token = $token;
-            $user->save();
-            return redirect('/dashboard')->cookie('Token', $token);
         }
+        $token = Str::random(60);
+        $user = new Usuario();
+        $user->Username = $username;
+        $user->Email = $email;
+        $user->Senha = $senha;
+        $user->Token = $token;
+        $user->save();
+        return redirect('/dashboard')->cookie('Token', $token);
+        
     }
 
     public function signIn(Request $req) {
@@ -59,19 +59,41 @@ class UsuarioControllers extends Controller
         if($user->Senha !== $senha){
             return 'o email ou a senha podem estar incorretos';
 
-        }else {
-            $user->Email = $email;
-            $user->Senha = $senha;
-            $user->Token = $token;
-            $user->save();
-            return redirect('/dashboard')->cookie('Token', $token);
         }
+        $user->Email = $email;
+        $user->Senha = $senha;
+        $user->Token = $token;
+        $user->save();
+        return redirect('/dashboard')->cookie('Token', $token);
+        
     }
 
     public function getAccount(Request $req){
         $token = $req->cookie('Token');
         $user = Usuario::where('Token', $token)->first();
         return view('account')->with("token", $user);
+    }
+
+    public function updateAccount(Request $req){
+        $token = $req->cookie('Token');
+        $senha = $req->input('Senha');
+        $nSenha = $req->input('NSenha');
+        $CSenha = $req->input('CSenha');
+        $user = Usuario::where('Token', $token)->first();
+
+        if($user->Senha !== $senha){
+            return 'Senha está incorreta';
+        }
+        if($nSenha !== $CSenha){
+            return 'Senha novas não estão iguais';
+        }
+        $user->update([
+            "Username" => $req->Username,
+            "Email" => $req->Email,
+            "Senha" => $req->CSenha
+        ]);
+        return redirect()->back();
+
     }
 
     public function logout()
