@@ -12,7 +12,9 @@ Route::get('/signup', [UsuarioControllers::class, "viewSignUp" ]);
 Route::post('/signup', [UsuarioControllers::class, "signUp"])->middleware(\App\Http\Middleware\ValidationSignUp::class);
 
 Route::get('/account', [UsuarioControllers::class, "getAccount"]);
-Route::post('/account', [UsuarioControllers::class, "updateAccount"])->middleware(\App\Http\Middleware\ValidationUpdateAccount::class);
+
+Route::get('/updateaccount', [UsuarioControllers::class, "getUpdateAccount"]);
+Route::post('/updateaccount', [UsuarioControllers::class, "updateAccount"])->middleware(\App\Http\Middleware\ValidationUpdateAccount::class);
 
 Route::get('/logout', [UsuarioControllers::class, "logout"])->name('logout');
 

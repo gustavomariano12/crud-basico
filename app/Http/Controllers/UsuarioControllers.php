@@ -74,6 +74,13 @@ class UsuarioControllers extends Controller
         return view('account')->with("token", $user);
     }
 
+    public function getUpdateAccount(Request $req){
+        $token = $req->cookie('Token');
+        $user = Usuario::where('Token', $token)->first();
+        return view('updateaccount')->with("token", $user);
+    }
+    
+
     public function updateAccount(Request $req){
         $token = $req->cookie('Token');
         $senha = $req->input('Senha');
