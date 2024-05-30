@@ -15,21 +15,34 @@ class ValidationUpdateAccount
      */
     public function handle(Request $request, Closure $next): Response
     {
+
+
+        if($request->input('NSenha') == "" && $request->input('CSenha') == ""){
+            $request->validate([
+                'Email' => 'email',
+                'Username' => '',
+                'Senha' => 'required|min:8',
+
+            ], [
+                'Email.required' => 'O campo email deve ser preenchido',
+                'Senha.required' => "O campo senha deve ser preenchido",
+                'Senha.min' => "o campo senha antiga deve haver mais do que :min digitos",
+            ]);
+            return $next($request);
+        }
+
         $request->validate([
-            'Email' => 'required|email',
-            'Username' => 'required',
+            'Email' => 'email',
+            'Username' => '',
             'Senha' => 'required|min:8',
-            'CSenha' => 'required|min:8',
-            'NSenha' => 'required|min:8',
+            'CSenha' => 'min:8',
+            'NSenha' => 'min:8',
 
         ], [
             'Email.required' => 'O campo email deve ser preenchido',
-            'Username.required' => "O campo username deve ser preenchido",
             'Senha.required' => "O campo senha deve ser preenchido",
             'Senha.min' => "o campo senha antiga deve haver mais do que :min digitos",
-            'CSenha.required' => "O campo confirmar deve ser preenchido",
             'CSenha.min' => "o campo confirmar senha deve haver mais do que :min digitos",
-            'NSenha.required' => "O campo senha antiga deve ser preenchido",
             'NSenha.min' => "o campo confirmar senha deve haver mais do que :min digitos",
 
         ]);

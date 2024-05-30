@@ -19,14 +19,14 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Username</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="Username" value="{{ $token->Username }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="Username" value="{{ $token->Username }}" autofocus>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Email</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="Email" value="{{ $token->Email }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="Email" value="{{ $token->Email }}"  autofocus>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -40,14 +40,14 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Senha Nova</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="NSenha" value="" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="NSenha" value=""  autofocus>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Confirma Senha</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="CSenha" value="" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="CSenha" value=""  autofocus>
                                 </div>
                             </div>
                             <br>
@@ -56,7 +56,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         Atualizar
                                     </button>
-                                    
+
                                 </div>
                             </div>
                         </form>
@@ -65,6 +65,6 @@
             </div>
         </div>
     </div>
-
+    
 
 @endsection

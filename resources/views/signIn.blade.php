@@ -4,6 +4,7 @@
 
 @section('content')
 
+
 <div class="container">
   <div class="row">
     <div class="col">
@@ -22,9 +23,15 @@
                 </div>
                 <p>Não tem conta? <a href="{{ url('/signup')}}">clique aqui</a></p>
                 <button type="submit" class="btn btn-primary">Entrar</button>
+
+
         </form>
     </div>
   </div>
 </div>
+
+
+
+
 
 @endsection

@@ -29,13 +29,13 @@ class UsuarioControllers extends Controller
         $emailQuery = Usuario::where('Email', $email)->first();
 
         if ($emailQuery !== null){
-            return 'email já cadastrado, utilize outro';
+            return redirect()->back()->withInput()->withErrors(['email' => 'email já cadastrado, utilize outro']);
         }
         if($usernameQuery !== null){
-            return 'username já utilzado, utilize outro';
+            return redirect()->back()->withInput()->withErrors(['username' => 'username já cadastrado, utilize outro']);
         }
         if($senha !== $csenha){
-            return "senhas não são iguais";
+            return redirect()->back()->withInput()->withErrors(['senha' => 'senhas não coincidem']);
         }
         $token = Str::random(60);
         $user = new Usuario();
@@ -45,7 +45,7 @@ class UsuarioControllers extends Controller
         $user->Token = $token;
         $user->save();
         return redirect('/dashboard')->cookie('Token', $token);
-        
+
     }
 
     public function signIn(Request $req) {
@@ -53,19 +53,15 @@ class UsuarioControllers extends Controller
         $senha = $req->input('Senha');
         $user = Usuario::where('Email', $email)->first();
         $token = Str::random(60);
-        if($user === null){
-            return 'o email ou a senha podem estar incorretos';
-        }
-        if($user->Senha !== $senha){
-            return 'o email ou a senha podem estar incorretos';
-
+        if($user === null || $user->Senha !== $senha ){
+            return redirect()->back()->withInput()->withErrors(['email' => 'Credenciais inválidas']);
         }
         $user->Email = $email;
         $user->Senha = $senha;
         $user->Token = $token;
         $user->save();
         return redirect('/dashboard')->cookie('Token', $token);
-        
+
     }
 
     public function getAccount(Request $req){
@@ -79,20 +75,28 @@ class UsuarioControllers extends Controller
         $user = Usuario::where('Token', $token)->first();
         return view('updateaccount')->with("token", $user);
     }
-    
+
 
     public function updateAccount(Request $req){
         $token = $req->cookie('Token');
         $senha = $req->input('Senha');
         $nSenha = $req->input('NSenha');
-        $CSenha = $req->input('CSenha');
+        $cSenha = $req->input('CSenha');
         $user = Usuario::where('Token', $token)->first();
 
         if($user->Senha !== $senha){
-            return 'Senha está incorreta';
+            return redirect()->back()->withInput()->withErrors(['senha' => 'senha inválida']);
         }
-        if($nSenha !== $CSenha){
-            return 'Senha novas não estão iguais';
+        if($nSenha !== $cSenha){
+            return redirect()->back()->withInput()->withErrors(['senha' => 'Senhas não coincidem']);
+        }
+        if($cSenha == '' && $nSenha == ''){
+            $user->update([
+                "Username" => $req->Username,
+                "Email" => $req->Email,
+                "Senha" => $req->Senha
+            ]);
+            return redirect()->back();
         }
         $user->update([
             "Username" => $req->Username,

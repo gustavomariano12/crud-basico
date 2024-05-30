@@ -16,7 +16,7 @@ class ValidationSignUp
     public function handle(Request $request, Closure $next): Response
     {
         $request->validate([
-            'Email' => 'required|email',
+            'Email' => 'required|email|unique:usuario,email',
             'Username' => 'required',
             'Senha' => 'required|min:8',
             'CSenha' => 'required|min:8',
