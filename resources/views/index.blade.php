@@ -40,7 +40,7 @@
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="text-center">
             <h2>Sem Clientes Cadastrados!!</h2>
-            <p>Deseja cadastrar um? <a href="{{ url('/cadastrar')}}">clique aqui</a></p>
+            <p>Deseja cadastrar? <a href="{{ url('/cadastrar')}}">clique aqui</a></p>
         </div>
     </div>
 @endif

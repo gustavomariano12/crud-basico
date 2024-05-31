@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("Nome");
             $table->string("Nascimento");
             $table->string("Telefone");
+            $table->string("Funcionario");
             $table->timestamps();
         });
     }

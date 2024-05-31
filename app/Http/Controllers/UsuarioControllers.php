@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Usuario;
+use App\Models\Funcionario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Cookie\CookieJar;
 use Illuminate\Support\Str;
@@ -25,20 +25,11 @@ class UsuarioControllers extends Controller
         $senha = $req->input('Senha');
         $csenha = $req->input('CSenha');
 
-        $usernameQuery = Usuario::where('Username', $username)->first();
-        $emailQuery = Usuario::where('Email', $email)->first();
-
-        if ($emailQuery !== null){
-            return redirect()->back()->withInput()->withErrors(['email' => 'email já cadastrado, utilize outro']);
-        }
-        if($usernameQuery !== null){
-            return redirect()->back()->withInput()->withErrors(['username' => 'username já cadastrado, utilize outro']);
-        }
         if($senha !== $csenha){
             return redirect()->back()->withInput()->withErrors(['senha' => 'senhas não coincidem']);
         }
         $token = Str::random(60);
-        $user = new Usuario();
+        $user = new Funcionario();
         $user->Username = $username;
         $user->Email = $email;
         $user->Senha = $senha;
@@ -51,7 +42,7 @@ class UsuarioControllers extends Controller
     public function signIn(Request $req) {
         $email = $req->input('Email');
         $senha = $req->input('Senha');
-        $user = Usuario::where('Email', $email)->first();
+        $user = Funcionario::where('Email', $email)->first();
         $token = Str::random(60);
         if($user === null || $user->Senha !== $senha ){
             return redirect()->back()->withInput()->withErrors(['email' => 'Credenciais inválidas']);
@@ -66,23 +57,23 @@ class UsuarioControllers extends Controller
 
     public function getAccount(Request $req){
         $token = $req->cookie('Token');
-        $user = Usuario::where('Token', $token)->first();
+        $user = Funcionario::where('Token', $token)->first();
         return view('account')->with("token", $user);
     }
 
     public function getUpdateAccount(Request $req){
         $token = $req->cookie('Token');
-        $user = Usuario::where('Token', $token)->first();
+        $user = Funcionario::where('Token', $token)->first();
         return view('updateaccount')->with("token", $user);
     }
 
 
-    public function updateAccount(Request $req){
+    /*public function updateAccount(Request $req){
         $token = $req->cookie('Token');
         $senha = $req->input('Senha');
         $nSenha = $req->input('NSenha');
         $cSenha = $req->input('CSenha');
-        $user = Usuario::where('Token', $token)->first();
+        $user = Funcionario::where('Token', $token)->first();
 
         if($user->Senha !== $senha){
             return redirect()->back()->withInput()->withErrors(['senha' => 'senha inválida']);
@@ -90,7 +81,7 @@ class UsuarioControllers extends Controller
         if($nSenha !== $cSenha){
             return redirect()->back()->withInput()->withErrors(['senha' => 'Senhas não coincidem']);
         }
-        if($cSenha == '' && $nSenha == ''){
+        if($cSenha === '' && $nSenha === ''){
             $user->update([
                 "Username" => $req->Username,
                 "Email" => $req->Email,
@@ -106,7 +97,7 @@ class UsuarioControllers extends Controller
         return redirect()->back();
 
     }
-
+    */
     public function logout()
     {
         Auth::logout();

@@ -13,9 +13,9 @@ Route::post('/signup', [UsuarioControllers::class, "signUp"])->middleware(\App\H
 
 Route::get('/account', [UsuarioControllers::class, "getAccount"])->middleware(\App\Http\Middleware\Auth::class);;
 
-Route::get('/updateaccount', [UsuarioControllers::class, "getUpdateAccount"])->middleware(\App\Http\Middleware\Auth::class);;
+/*Route::get('/updateaccount', [UsuarioControllers::class, "getUpdateAccount"])->middleware(\App\Http\Middleware\Auth::class);;
 Route::post('/updateaccount', [UsuarioControllers::class, "updateAccount"])->middleware(\App\Http\Middleware\Auth::class)->middleware(\App\Http\Middleware\ValidationUpdateAccount::class);
-
+*/
 Route::get('/logout', [UsuarioControllers::class, "logout"])->name('logout');
 
 
