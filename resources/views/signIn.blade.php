@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group mb-2">
                     <label for="exampleInputPassword1">Senha</label>
-                    <input type="text" class="form-control" name="Senha" value="" placeholder="Senha ">
+                    <input type="password" class="form-control" name="Senha" value="" placeholder="Senha ">
                 </div>
                 <p>Não tem conta? <a href="{{ url('/signup')}}">clique aqui</a></p>
                 <button type="submit" class="btn btn-primary">Entrar</button>

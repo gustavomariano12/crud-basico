@@ -66,38 +66,6 @@ class UsuarioControllers extends Controller
         $user = Funcionario::where('Token', $token)->first();
         return view('updateaccount')->with("token", $user);
     }
-
-
-    /*public function updateAccount(Request $req){
-        $token = $req->cookie('Token');
-        $senha = $req->input('Senha');
-        $nSenha = $req->input('NSenha');
-        $cSenha = $req->input('CSenha');
-        $user = Funcionario::where('Token', $token)->first();
-
-        if($user->Senha !== $senha){
-            return redirect()->back()->withInput()->withErrors(['senha' => 'senha inválida']);
-        }
-        if($nSenha !== $cSenha){
-            return redirect()->back()->withInput()->withErrors(['senha' => 'Senhas não coincidem']);
-        }
-        if($cSenha === '' && $nSenha === ''){
-            $user->update([
-                "Username" => $req->Username,
-                "Email" => $req->Email,
-                "Senha" => $req->Senha
-            ]);
-            return redirect()->back();
-        }
-        $user->update([
-            "Username" => $req->Username,
-            "Email" => $req->Email,
-            "Senha" => $req->CSenha
-        ]);
-        return redirect()->back();
-
-    }
-    */
     public function logout()
     {
         Auth::logout();

@@ -22,11 +22,11 @@
                 </div>
                 <div class="form-group mb-2">
                     <label for="exampleInputPassword1">Senha</label>
-                    <input type="text" class="form-control" name="Senha" value="" placeholder="Digite sua senha" >
+                    <input type="password" class="form-control" name="Senha" value="" placeholder="Digite sua senha" >
                 </div>
                 <div class="form-group mb-2">
                     <label for="exampleInputPassword1">Confirmar Senha</label>
-                    <input type="text" class="form-control" name="CSenha"  placeholder="Confirme sua senha">
+                    <input type="password" class="form-control" name="CSenha"  placeholder="Confirme sua senha">
                 </div>
                 <p>Já em conta? <a href="{{ url('/')}}">clique aqui</a></p>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
